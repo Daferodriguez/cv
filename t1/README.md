@@ -23,8 +23,8 @@ Complete la tabla:
 
 | Ilusión | Categoria | Referencia | Tipo de interactividad (si aplica) | URL código base (si aplica) |
 |---------|-----------|------------|------------------------------------|-----------------------------|
-|    Moire     |     Movimiento      |     https://www.openprocessing.org/sketch/348969       |                                    |              https://github.com/Daferodriguez/Optical_Illusions/tree/master/circulos               |
-|         |           |            |                                    |                             |
+|    Moire     |     Movimiento      |     https://www.openprocessing.org/sketch/348969       |                 El patrón de interferencia de los círculos y las líneas forma un efecto conocido como efecto de Moiré, que produce la visualización de diferentes formas y deformaciones                   |              https://github.com/Daferodriguez/Optical_Illusions/tree/master/circulos               |
+|    Círculos Grandes a Pequeños     |     Cognitiva      |            |             Los círculos superpuestos se ven más pequeños que aquellos que están hacia el "Fondo"                       |               https://github.com/Daferodriguez/Optical_Illusions/tree/master/circulosGrandesYPequen              |
 |         |           |            |                                    |                             |
 |         |           |            |                                    |                             |
 |         |           |            |                                    |                             |
