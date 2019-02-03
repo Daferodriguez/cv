@@ -38,7 +38,7 @@ ArrayList<Boid> flock;
 Frame avatar;
 boolean animate = true;
 boolean retenido = false;
-
+Interpolator interpolator;
 void setup() {
   size(1000, 800, P3D);
   scene = new Scene(this);
@@ -58,6 +58,37 @@ void draw() {
   directionalLight(255, 255, 255, 0, 1, -100);
   walls();
   scene.traverse();
+  interpolator = new Interpolator(scene, new Frame());
+
+  for (int i = 0; i < 8; i++) {
+    Frame ctrlPoint = new Frame(scene);
+    ctrlPoint.visit();
+    //System.out.println(ctrlPoint);
+    interpolator.addKeyFrame(ctrlPoint);
+    //System.out.println(interpolator);
+    }
+
+  Functions bezier = new Functions();
+  Functions hermite = new Functions();
+  Functions bezier3 = new Functions();
+  Functions natural = new Functions();
+
+  List<Vector> puntos = new ArrayList<Vector>();
+  
+  for(Frame frame : interpolator.keyFrames()){
+    puntos.add(frame.position());
+    //puntos.add(punto);
+  }
+
+  int modo = 3;
+
+  switch(modo){
+    case 3: 
+      hermite.setPoints(puntos);
+      hermite.hermite();
+      text("Hermite", -100, 0);
+      break;
+  }
   // uncomment to asynchronously update boid avatar. See mouseClicked()
   // updateAvatar(scene.trackedFrame("mouseClicked"));
 }

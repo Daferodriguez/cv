@@ -156,11 +156,10 @@ class Boid {
       stroke(color(255, 0, 0));
       fill(color(255, 0, 0));
     }
-
    
     
     // 1 es modo Face-Vertex | 2 es modo Vertex-Vertex
-    int modo = 2;
+    int modo = 1;
     boolean retenido = false;
     
     switch(modo){
@@ -183,8 +182,6 @@ class Boid {
         }
         break;
     }
-    
-    
     
     popStyle();
   }
