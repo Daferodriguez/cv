@@ -8,7 +8,6 @@ class Face_vertex{
   Face_vertex(){
     strokeWeight(2);
     stroke(color(0, 255, 0));
-    fill(color(0, 0, 0, 125));
     
     // LISTA DE CARAS
     face_list.add(new Integer[]{0,1,3});
