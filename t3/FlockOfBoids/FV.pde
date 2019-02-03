@@ -33,11 +33,11 @@ class Face_vertex{
     vertex_list.add(new PVector(-3,2,0));
     vertex_list.add(new PVector(-3,2,2));
     
-    creandocaravertice();
+    renderRetenido();
   }
   
   //modo retenido
-  void creandocaravertice(){
+  void renderRetenido(){
     s = createShape();
     s.beginShape(QUAD);
      for(int i=0; i<face_list.size(); i++){
@@ -50,7 +50,7 @@ class Face_vertex{
   }
 
   //modo inmediato
-  void creandocaraverticeInmediato(){
+  void renderInmediato(){
     beginShape(QUAD);
     for(int i=0; i<face_list.size(); i++){
       for(int j=0; j<=face_list.get(i).length; j++){

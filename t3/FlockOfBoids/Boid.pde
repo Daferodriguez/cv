@@ -15,13 +15,7 @@ class Boid {
   PShape boidShape;
   List<PShape> boidShapeList;
 
-  Boid(Vector inPos, boolean retenido) {
-    this.retenido = retenido;    
-    if( retenido ){
-      this.boidShape = boidShape = createShape();
-
-    }
-    
+  Boid(Vector inPos) {
     position = new Vector();
     position.set(inPos);
     frame = new Frame(scene) {
@@ -163,14 +157,34 @@ class Boid {
       fill(color(255, 0, 0));
     }
 
-    Face_vertex x = new Face_vertex();
+   
     
-    if(!retenido){
-      x.creandocaraverticeInmediato();
-    }else{
-      PShape s = x.getShape();
-      shape(s);
+    // 1 es modo Face-Vertex | 2 es modo Vertex-Vertex
+    int modo = 2;
+    boolean retenido = false;
+    
+    switch(modo){
+      case 1:
+        Face_vertex x = new Face_vertex();
+        if(!retenido){
+          x.renderInmediato();
+        }else{
+          PShape s = x.getShape();
+          shape(s);
+        }
+        break;
+      case 2:
+        Vertex_vertex y = new Vertex_vertex();
+        if(!retenido){
+          y.renderInmediato();
+        }else{
+          PShape s = y.getShape();
+          shape(s);
+        }
+        break;
     }
+    
+    
     
     popStyle();
   }
