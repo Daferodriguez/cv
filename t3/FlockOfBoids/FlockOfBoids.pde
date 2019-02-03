@@ -39,6 +39,8 @@ Frame avatar;
 boolean animate = true;
 boolean retenido = false;
 Interpolator interpolator;
+Functions bezier, hermite, bezier3, natural;
+
 void setup() {
   size(1000, 800, P3D);
   scene = new Scene(this);
@@ -46,10 +48,27 @@ void setup() {
   scene.setAnchor(scene.center());
   scene.setFieldOfView(PI / 3);
   scene.fitBall();
+  
+  
   // create and fill the list of boids
   flock = new ArrayList();
   for (int i = 0; i < initBoidNum; i++)
     flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2)));
+  
+  interpolator = new Interpolator(scene, new Frame());
+
+  for (int i = 0; i < initBoidNum; i++) {
+    Frame ctrlPoint = new Frame(scene);
+    ctrlPoint.randomize();
+    //System.out.println(ctrlPoint);
+    interpolator.addKeyFrame(ctrlPoint);
+    //System.out.println(interpolator);
+  }
+
+  bezier = new Functions();
+  hermite = new Functions();
+  bezier3 = new Functions();
+  natural = new Functions();
 }
 
 void draw() {
@@ -58,21 +77,7 @@ void draw() {
   directionalLight(255, 255, 255, 0, 1, -100);
   walls();
   scene.traverse();
-  interpolator = new Interpolator(scene, new Frame());
-
-  for (int i = 0; i < 8; i++) {
-    Frame ctrlPoint = new Frame(scene);
-    ctrlPoint.visit();
-    //System.out.println(ctrlPoint);
-    interpolator.addKeyFrame(ctrlPoint);
-    //System.out.println(interpolator);
-    }
-
-  Functions bezier = new Functions();
-  Functions hermite = new Functions();
-  Functions bezier3 = new Functions();
-  Functions natural = new Functions();
-
+  
   List<Vector> puntos = new ArrayList<Vector>();
   
   for(Frame frame : interpolator.keyFrames()){
@@ -81,7 +86,7 @@ void draw() {
   }
 
   int modo = 3;
-
+  
   switch(modo){
     case 3: 
       hermite.setPoints(puntos);
@@ -89,6 +94,8 @@ void draw() {
       text("Hermite", -100, 0);
       break;
   }
+  
+  scene.drawPath(interpolator);
   // uncomment to asynchronously update boid avatar. See mouseClicked()
   // updateAvatar(scene.trackedFrame("mouseClicked"));
 }
