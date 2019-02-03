@@ -40,6 +40,7 @@ boolean animate = true;
 boolean retenido = false;
 Interpolator interpolator;
 Functions bezier, hermite, bezier3, natural;
+int modo = 0;
 
 void setup() {
   size(1000, 800, P3D);
@@ -48,7 +49,6 @@ void setup() {
   scene.setAnchor(scene.center());
   scene.setFieldOfView(PI / 3);
   scene.fitBall();
-  
   
   // create and fill the list of boids
   flock = new ArrayList();
@@ -84,14 +84,18 @@ void draw() {
     puntos.add(frame.position());
     //puntos.add(punto);
   }
-
-  int modo = 3;
   
+  textSize(50);
   switch(modo){
-    case 3: 
+    case 0: 
       hermite.setPoints(puntos);
       hermite.hermite();
       text("Hermite", -100, 0);
+      break;
+    case 1: 
+      bezier3.setPoints(puntos);
+      bezier3.Bezier3();
+      text("Bezier cúbico", -100, 0);
       break;
   }
   
@@ -203,6 +207,13 @@ void keyPressed() {
     break;
   case 'p':
     println("Frame rate: " + frameRate);
+    break;
+  case 'c':
+    if(modo == 1){
+      modo = 0;
+    }else{
+      modo = 1;
+    }
     break;
   case 'v':
     avoidWalls = !avoidWalls;
