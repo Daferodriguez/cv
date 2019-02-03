@@ -17,7 +17,7 @@ Empleando el [FlockOfBoids](https://github.com/VisualComputing/frames/tree/maste
 
 1. Represente los _boids_ mediante superficies de spline.
 2. Implemente las curvas cúbicas naturales.
-3. La figura renderizada es un prisma.
+3. La figura renderizada es un prisma rectangular.
 
 ## Integrantes
 
