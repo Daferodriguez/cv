@@ -59,7 +59,7 @@ void setup() {
 
   for (int i = 0; i < initBoidNum; i++) {
     Frame ctrlPoint = new Frame(scene);
-    ctrlPoint.randomize();
+    ctrlPoint.setPosition(flock.get(i).position);
     //System.out.println(ctrlPoint);
     interpolator.addKeyFrame(ctrlPoint);
     //System.out.println(interpolator);
@@ -95,7 +95,7 @@ void draw() {
       break;
   }
   
-  scene.drawPath(interpolator);
+  //scene.drawPath(interpolator);
   // uncomment to asynchronously update boid avatar. See mouseClicked()
   // updateAvatar(scene.trackedFrame("mouseClicked"));
 }

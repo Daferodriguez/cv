@@ -159,7 +159,7 @@ class Boid {
    
     
     // 1 es modo Face-Vertex | 2 es modo Vertex-Vertex
-    int modo = 3;
+    int modo = 1;
     boolean retenido = false;
     
     switch(modo){
