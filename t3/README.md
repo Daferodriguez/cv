@@ -26,7 +26,7 @@ Complete la tabla:
 
 | Integrante | github nick |
 |------------|-------------|
-|            |             |
+|      David Felipe Rodriguez Rodriguez      |     Daferodriguez        |
 
 ## Entrega
 
