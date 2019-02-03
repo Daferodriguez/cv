@@ -17,6 +17,7 @@ Empleando el [FlockOfBoids](https://github.com/VisualComputing/frames/tree/maste
 
 1. Represente los _boids_ mediante superficies de spline.
 2. Implemente las curvas cúbicas naturales.
+3. La figura renderizada es un prisma.
 
 ## Integrantes
 
@@ -27,6 +28,12 @@ Complete la tabla:
 | Integrante | github nick |
 |------------|-------------|
 |      David Felipe Rodriguez Rodriguez      |     Daferodriguez        |
+
+## Desarrollo
+
+1. Para la representación de la malla se implementaron las formas Face-vertex y Vertex-Vertex.
+2. Los modos retenido e inmediato estan implementados para ambas formas.
+3. 
 
 ## Entrega
 
