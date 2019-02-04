@@ -40,7 +40,7 @@ class Face_vertex{
   void renderRetenido(){
     s = createShape();
     s.beginShape(QUAD);
-     for(int i=0; i<face_list.size(); i++){
+    for(int i=0; i<face_list.size(); i++){
       for(int j=0; j<=face_list.get(i).length; j++){
         PVector vertex = vertex_list.get(face_list.get(i)[j%3]);    //Obtener la coordenada del vertice adyacente actual
         s.vertex(vertex.x*sc,vertex.y*sc,vertex.z*sc);        
