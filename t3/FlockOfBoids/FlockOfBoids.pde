@@ -97,6 +97,11 @@ void draw() {
       bezier3.Bezier3();
       text("Bezier cúbico", -100, 0);
       break;
+    case 2:
+      natural.setPoints(puntos);
+      natural.Bezier3();
+      text("Natural cúbico", -100, 0);
+      break;
   }
   
   //scene.drawPath(interpolator);
@@ -211,8 +216,10 @@ void keyPressed() {
   case 'c':
     if(modo == 1){
       modo = 0;
-    }else{
+    }else if(modo == 0){
       modo = 1;
+    }else{
+      modo = 2;
     }
     break;
   case 'v':
