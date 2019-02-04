@@ -26,7 +26,7 @@ Complete la tabla:
 
 | Integrante | github nick |
 |------------|-------------|
-|      David Felipe Rodriguez Rodriguez      |     Daferodriguez        |
+|      David Felipe Rodriguez Rodriguez      |     Daferodriguez        |      John Alexander Hernandez Carrero      |    joahernandezca
 
 ## Desarrollo
 
