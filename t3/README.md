@@ -35,6 +35,9 @@ Complete la tabla:
 2. Los modos retenido e inmediato estan implementados para ambas formas.
 3. La figura renderizada es un prisma rectangular.
 
+## Opcionales
+2. Se realizo la implementacion de las curvas cubicas naturales.
+
 ## Entrega
 
 * Subir el código al repositorio de la materia antes del 3/2/19 a las 24h.
