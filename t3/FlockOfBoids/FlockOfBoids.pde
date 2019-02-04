@@ -99,7 +99,7 @@ void draw() {
       break;
     case 2:
       natural.setPoints(puntos);
-      natural.Bezier3();
+      natural.splineCubicaNatural();
       text("Natural cúbico", -100, 0);
       break;
   }
@@ -214,12 +214,12 @@ void keyPressed() {
     println("Frame rate: " + frameRate);
     break;
   case 'c':
-    if(modo == 1){
-      modo = 0;
-    }else if(modo == 0){
+    if(modo == 0){
       modo = 1;
-    }else{
+    }else if(modo == 1){
       modo = 2;
+    }else{
+      modo = 0;
     }
     break;
   case 'v':
