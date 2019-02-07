@@ -38,6 +38,12 @@ Complete la tabla:
 ## Opcionales
 2. Se realizo la implementacion de las curvas cubicas naturales.
 
+## Referencias
+1. http://www.inf-cr.uclm.es/www/cglez/downloads/docencia/AC/splines.pdf
+2. http://mathworld.wolfram.com/BezierCurve.html
+3. http://soft.vub.ac.be/~tvcutsem/teaching/wpo/grafsys/ex9/les9.html
+4. https://en.wikipedia.org/wiki/Cubic_Hermite_spline
+
 ## Entrega
 
 * Subir el código al repositorio de la materia antes del 3/2/19 a las 24h.
