@@ -1,4 +1,4 @@
-import java.util.List;
+
 
 class Boid {
   public Frame frame;
@@ -22,7 +22,7 @@ class Boid {
       // Note that within visit() geometry is defined at the
       // frame local coordinate system.
       @Override
-        public void visit() {
+      public void visit() {
         if (animate)
           run(flock);
         render();
@@ -156,10 +156,10 @@ class Boid {
       stroke(color(255, 0, 0));
       fill(color(255, 0, 0));
     }
-   
-    
+
+    //draw boid
     // 1 es modo Face-Vertex | 2 es modo Vertex-Vertex
-    int modo = 2;
+    int modo = 1;
     boolean retenido = false;
     
     switch(modo){
@@ -168,8 +168,11 @@ class Boid {
         if(!retenido){
           x.renderInmediato();
         }else{
+          PShape grupo = createShape(GROUP);
           PShape s = x.getShape();
-          shape(s);
+          grupo.addChild(s);
+          //shape(s);
+          shape(grupo);
         }
         break;
       case 2:

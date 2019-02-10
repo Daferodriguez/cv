@@ -19,19 +19,21 @@
  * Press 'p' to print the current frame rate.
  * Press 'm' to change the boid visual mode.
  * Press 'v' to toggle boids' wall skipping.
- * Press 's' to call scene.fitBallInterpolation().
+ * Press 's' to call scene.fit(1).
  */
 
 import frames.primitives.*;
+import frames.primitives.Vector;
 import frames.core.*;
 import frames.processing.*;
+import java.util.*;
 
 Scene scene;
 //flock bounding box
-static int flockWidth = 1280;
-static int flockHeight = 720;
-static int flockDepth = 600;
-static boolean avoidWalls = true;
+int flockWidth = 1280;
+int flockHeight = 720;
+int flockDepth = 600;
+boolean avoidWalls = true;
 
 int initBoidNum = 900; // amount of boids to start the program with
 ArrayList<Boid> flock;
@@ -45,18 +47,14 @@ int modo = 0;
 void setup() {
   size(1000, 800, P3D);
   scene = new Scene(this);
-  scene.setBoundingBox(new Vector(0, 0, 0), new Vector(flockWidth, flockHeight, flockDepth));
-  scene.setAnchor(scene.center());
-  scene.setFieldOfView(PI / 3);
-  scene.fitBall();
-  
+  scene.setFrustum(new Vector(0, 0, 0), new Vector(flockWidth, flockHeight, flockDepth));
+  scene.fit();
   // create and fill the list of boids
   flock = new ArrayList();
   for (int i = 0; i < initBoidNum; i++)
     flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2)));
-  
   interpolator = new Interpolator(scene, new Frame());
-
+  
   for (int i = 0; i < initBoidNum; i++) {
     Frame ctrlPoint = new Frame(scene);
     ctrlPoint.setPosition(flock.get(i).position);
@@ -64,7 +62,6 @@ void setup() {
     interpolator.addKeyFrame(ctrlPoint);
     //System.out.println(interpolator);
   }
-
   bezier = new Functions();
   hermite = new Functions();
   bezier3 = new Functions();
@@ -77,7 +74,8 @@ void draw() {
   directionalLight(255, 255, 255, 0, 1, -100);
   walls();
   scene.traverse();
-  
+  // uncomment to asynchronously update boid avatar. See mouseClicked()
+  // updateAvatar(scene.trackedFrame("mouseClicked"));
   List<Vector> puntos = new ArrayList<Vector>();
   
   for(Frame frame : interpolator.keyFrames()){
@@ -90,23 +88,26 @@ void draw() {
     case 0: 
       hermite.setPoints(puntos);
       hermite.hermite();
-      text("Hermite", -100, 0);
+      scene.beginHUD();
+      text("Hermite", 50, 50);
+      scene.endHUD();
       break;
     case 1: 
       bezier3.setPoints(puntos);
       bezier3.Bezier3();
-      text("Bezier cúbico", -100, 0);
+      scene.beginHUD();
+      text("Bezier cúbico", 50, 50);
+      scene.endHUD();
       break;
     case 2:
       natural.setPoints(puntos);
       natural.splineCubicaNatural();
-      text("Natural cúbico", -100, 0);
+      scene.beginHUD();
+      text("Natural cúbico", 50, 50);
+      scene.endHUD();
       break;
   }
   
-  //scene.drawPath(interpolator);
-  // uncomment to asynchronously update boid avatar. See mouseClicked()
-  // updateAvatar(scene.trackedFrame("mouseClicked"));
 }
 
 void walls() {
@@ -131,9 +132,9 @@ void walls() {
   popStyle();
 }
 
-void updateAvatar(Frame boid) {
-  if (boid != avatar) {
-    avatar = boid;
+void updateAvatar(Frame frame) {
+  if (frame != avatar) {
+    avatar = frame;
     if (avatar != null)
       thirdPerson();
     else if (scene.eye().reference() != null)
@@ -144,7 +145,7 @@ void updateAvatar(Frame boid) {
 // Sets current avatar as the eye reference and interpolate the eye to it
 void thirdPerson() {
   scene.eye().setReference(avatar);
-  scene.interpolateTo(avatar);
+  scene.fit(avatar, 1);
 }
 
 // Resets the eye
@@ -152,7 +153,7 @@ void resetEye() {
   // same as: scene.eye().setReference(null);
   scene.eye().resetReference();
   scene.lookAt(scene.center());
-  scene.fitBallInterpolation();
+  scene.fit(1);
 }
 
 // picks up a boid avatar, may be null
@@ -178,8 +179,7 @@ void mouseDragged() {
       // same as: scene.translate(scene.eye());
       scene.translate();
     else
-      // same as: scene.zoom(mouseX - pmouseX, scene.eye());
-      scene.zoom(mouseX - pmouseX);
+      scene.moveForward(mouseX - pmouseX);
 }
 
 // highlighting and 'third-person' interaction
@@ -205,7 +205,7 @@ void keyPressed() {
     break;
   case 's':
     if (scene.eye().reference() == null)
-      scene.fitBallInterpolation();
+      scene.fit(1);
     break;
   case 't':
     scene.shiftTimers();
