@@ -34,38 +34,61 @@ ControlButton button8; // START
 // frames stuff:
 Scene scene;
 boolean snPicking;
-Shape s;
+Shape s, shp;
+Shape[] shapes;
 boolean rot = false;
+PShape sh;
 
 void setup() {
   size(720, 640, P3D);
-  openXbox360Controller();
+  //openXbox360Controller();
   scene = new Scene(this);
   scene.setRadius(1500);
   scene.fit(1);
   tint(255, 255, 255, 255);
   s = new Shape(scene, loadShape("rocket.obj"));
-  
+  shapes = new Shape[20];
+
+  for (int i = 0; i < shapes.length; i++) {
+    shapes[i] = new Shape(scene, getSphere());
+    //shapes[i].setPosition(0,1200,1200);
+    scene.randomize(shapes[i]);
+  }
   smooth();
+}
+
+PShape getSphere() {
+  noStroke();
+  sh = createShape(SPHERE, 40);
+  fill(192, 192, 192);
+  // a partir de aca podemos modificar las normales
+  for (int i = 0; i < sh.getVertexCount(); i++) {
+    PVector v = sh.getVertex(i);
+    //println(v.x);
+    //println(v.y);
+    //println(v.z);
+  }
+  return sh;
 }
 
 void draw() {
   background(0);
-  scene.drawAxes();
+  ambientLight(128, 128, 128);
+  directionalLight(255, 255, 255, 0, 1, -100);
+  //scene.drawAxes();
   scene.traverse();
-  
-  xbox360Interaction();
-  if(rot){
+  //xbox360Interaction();
+  if (rot) {
     moveRocketX();
   }
-  
+
   /*
   buttonPressed();
-  if (snPicking)
-    xbox360Picking();
-  else
-    xbox360Interaction();
-  */
+   if (snPicking)
+   xbox360Picking();
+   else
+   xbox360Interaction();
+   */
 }
 
 void mouseMoved() {
@@ -75,31 +98,33 @@ void mouseMoved() {
 void keyPressed() {
   if (key == ' ')
     snPicking = !snPicking;
-  if (key == 's'){
-    if(!rot){
+  if (key == 's') {
+    if (!rot) {
+      pushMatrix();
       scene.rotate("XBOXNAV", PI/2, 0, 3*PI/2);
       scene.translate(-250, 0, 0);
       rot = true;
+      popMatrix();
     }
   }
 }
 
-void mouseClicked(){
-    scene.cast("XBOXNAV");
-    scene.eye().setReference(scene.track("XBOXNAV"));
+void mouseClicked() {
+  scene.cast("XBOXNAV");
+  scene.eye().setReference(scene.track("XBOXNAV"));
 }
 
-void buttonPressed(){
-    if(button1.pressed()){
-      snPicking = !snPicking;
-    }
+void buttonPressed() {
+  if (button1.pressed()) {
+    snPicking = !snPicking;
+  }
 }
 
 void openXbox360Controller() {
   println(System.getProperty("os.name"));
   control = ControlIO.getInstance(this);
   String os = System.getProperty("os.name").toLowerCase();
-  
+
   device = control.getDevice("Controller (Xbox 360 Wireless Receiver for Windows)");// magic name for linux
   if (device == null) {
     println("No suitable device configured");
@@ -120,15 +145,22 @@ void openXbox360Controller() {
   button6 = device.getButton(5);
   button7 = device.getButton(6);
   button8 = device.getButton(7);
-  
+
   //button2 = device.getButton(1);
 }
 
-void moveRocketX(){
-  scene.translate("XBOXNAV", 1, 0, 0);
+void moveRocketX() {
+  for (int i = 0; i < shapes.length; i++) {
+    //shapes[i].setPosition(0,1200,1200);
+    Frame f = new Frame(shapes[i]);
+    if (f.position().y() < -200) {
+      shapes[i].setPosition(0, random(3000, 3200), random(-1500, 1500));
+    }
+    shapes[i].translate(0, -10, 0);
+  }
 }
 
-void xbox360Interaction(){
+void xbox360Interaction() {
   //scene.translate("XBOXNAV", 2 * snXPos.getValue(), 2 * snYPos.getValue(), 2 * snZPos.getValue());
   scene.translate("XBOXNAV", 2 * snYPos.getValue(), 2 * snZPos.getValue(), 0);
   //scene.rotate("XBOXNAV", -snXRot.getValue() * 5 * PI / width, snYRot.getValue() * 5 * PI / width, 0);
