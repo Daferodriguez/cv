@@ -28,15 +28,6 @@ Complete la tabla:
 2. La escena creada fue un videojuego que consiste en una nave que tiene que atravesar el espacio esquivado unos asteroides que vienen en su camino, en control de la nave es totalmente generado por el control del xbox.
 3. Para los asteroides se utilizaron shaders para darle el aspecto rocoso que se buscaba
 
-2. Se realizo la implementacion de las curvas cubicas naturales.
-
-## Referencias
-1. http://www.inf-cr.uclm.es/www/cglez/downloads/docencia/AC/splines.pdf
-2. http://mathworld.wolfram.com/BezierCurve.html
-3. http://soft.vub.ac.be/~tvcutsem/teaching/wpo/grafsys/ex9/les9.html
-4. https://en.wikipedia.org/wiki/Cubic_Hermite_spline
-
 ## Entrega
 
-* Subir el código al repositorio de la materia antes del 3/2/19 a las 24h.
-* Presentar el trabajo en la clase del 6/2/19 o 7/2/19.
+Fecha límite Domingo 10/3/19 a las 24h.
