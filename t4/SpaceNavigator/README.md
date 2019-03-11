@@ -2,21 +2,13 @@
 
 ## Propósitos
 
-1. Estudiar la relación entre las [aplicaciones de mallas poligonales](https://github.com/VisualComputing/representation), su modo de [representación](https://en.wikipedia.org/wiki/Polygon_mesh) (i.e., estructuras de datos empleadas para representar la malla en RAM) y su modo de [renderizado](https://processing.org/tutorials/pshape/) (i.e., modo de transferencia de la geometría a la GPU).
-2. Estudiar algunos tipos de [curvas y superficies paramétricas](https://github.com/VisualComputing/Curves) y sus propiedades.
+1. Estudiar las tres tareas universales de interacción en entornos virtuales.
+2. Estudiar los patrones de diseño de shaders.
 
 ## Tareas
 
-Empleando el [FlockOfBoids](https://github.com/VisualComputing/frames/tree/master/examples/demos/FlockOfBoids):
-
-1. Represente la malla del [boid](https://github.com/VisualComputing/frames/blob/master/examples/demos/FlockOfBoids/Boid.pde) al menos de dos formas distintas.
-2. Renderice el _flock_ en modo inmediato y retenido, implementando la función ```render()``` del [boid](https://github.com/VisualComputing/frames/blob/master/examples/demos/FlockOfBoids/Boid.pde).
-3. Implemente las curvas cúbicas de Hermite y Bezier (cúbica y de grado 7), empleando la posición del `frame` del _boid_ como punto de control.
-
-## Opcionales
-
-1. Represente los _boids_ mediante superficies de spline.
-2. Implemente las curvas cúbicas naturales.
+1. Emplee un dispositivo de interfaz humana no convencional para controlar una escena. Refiérase al ejemplo SpaceNavigator. Se puede emplear la escena del punto 2 del taller de transformaciones
+2. Aplicar Shaders a la escena antes creada.
 
 ## Integrantes
 
@@ -28,14 +20,14 @@ Complete la tabla:
 |------------|-------------|
 |      David Felipe Rodriguez Rodriguez      |     Daferodriguez        |
 |      John Alexander Hernandez Carrero      |    joahernandezca        |
+|      Sergio Alexander Gil Medina           |        sagilm            |
 
-## Desarrollo
+## Informe
 
-1. Para la representación de la malla se implementaron las formas Face-vertex y Vertex-Vertex.
-2. Los modos retenido e inmediato estan implementados para ambas formas.
-3. La figura renderizada es un prisma rectangular.
+1. El dispositivo de interfaz humana no convencional escogido fue el control en este caso de un Xbox 360 mediante un controlador que emula la conexion inalambrica con este, y por medio de la libreria Control Plus.
+2. La escena creada fue un videojuego que consiste en una nave que tiene que atravesar el espacio esquivado unos asteroides que vienen en su camino, en control de la nave es totalmente generado por el control del xbox.
+3. Para los asteroides se utilizaron shaders para darle el aspecto rocoso que se buscaba
 
-## Opcionales
 2. Se realizo la implementacion de las curvas cubicas naturales.
 
 ## Referencias
