@@ -38,17 +38,19 @@ Shape s, shp;
 Shape[] shapes;
 boolean rot = false;
 PShape sh;
+PImage tex;
 
 void setup() {
   size(720, 640, P3D);
-  //openXbox360Controller();
+  openXbox360Controller();
   scene = new Scene(this);
   scene.setRadius(1500);
   scene.fit(1);
   tint(255, 255, 255, 255);
   s = new Shape(scene, loadShape("rocket.obj"));
   shapes = new Shape[20];
-
+  textureMode(NORMAL);
+  tex = loadImage("bump.png");
   for (int i = 0; i < shapes.length; i++) {
     shapes[i] = new Shape(scene, getSphere());
     //shapes[i].setPosition(0,1200,1200);
@@ -60,13 +62,17 @@ void setup() {
 PShape getSphere() {
   noStroke();
   sh = createShape(SPHERE, 40);
-  fill(192, 192, 192);
-  // a partir de aca podemos modificar las normales
-  for (int i = 0; i < sh.getVertexCount(); i++) {
-    PVector v = sh.getVertex(i);
-    //println(v.x);
-    //println(v.y);
-    //println(v.z);
+   sh= sh.getTessellation();
+  sh.setTexture(tex);
+  float posu=tex.width*tex.height;
+  println(posu);
+  for(int i =0;i<sh.getVertexCount();i++){
+  int which = (int)random(sh.getVertexCount());
+  color r1 = -1*int(red(tex.pixels[(int) (which*posu/sh.getVertexCount())])+green(tex.pixels[(int) (which*posu/sh.getVertexCount())])+blue(tex.pixels[(int) (which*posu/sh.getVertexCount())])/3);
+  PVector r = new PVector(0,0,(r1/30));
+  println(r);
+   //shp.setTextureUV(which, random(1), random(1));
+  sh.setVertex(which, PVector.add(sh.getVertex(which),r));
   }
   return sh;
 }
@@ -77,7 +83,7 @@ void draw() {
   directionalLight(255, 255, 255, 0, 1, -100);
   //scene.drawAxes();
   scene.traverse();
-  //xbox360Interaction();
+  xbox360Interaction();
   if (rot) {
     moveRocketX();
   }
@@ -121,7 +127,7 @@ void buttonPressed() {
 }
 
 void openXbox360Controller() {
-  println(System.getProperty("os.name"));
+  //println(System.getProperty("os.name"));
   control = ControlIO.getInstance(this);
   String os = System.getProperty("os.name").toLowerCase();
 
